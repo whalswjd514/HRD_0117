@@ -48,18 +48,18 @@
 	request.setCharacterEncoding("utf-8");
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;
-	int no=0;
+	int cnt=0;
 	try{
-		String sql="select id1_seq.nextval from dual";
+		String sql="select max(id) from member0117";
 		pstmt=conn.prepareStatement(sql);
 		rs=pstmt.executeQuery();
 		if(rs.next()){
-			no=rs.getInt(1)+1;
+			cnt=rs.getInt(1)+1;
 		}else{
-			no=0;
+			cnt=0;
 		}
 	}catch(SQLException e){
-		System.out.println("시퀀스 조회 실패");
+		System.out.println("데이터 조회 실패");
 		e.printStackTrace();
 	}
 %>
@@ -69,7 +69,7 @@
 <table border=1 id="tab1">
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="id" id="in1" value="<%=no %>">(마지막번호+1)</td>
+		<td><input type="text" name="id" id="in1" value="<%=cnt %>">(마지막번호+1)</td>
 	</tr>
 	<tr>
 		<th>성명</th>
