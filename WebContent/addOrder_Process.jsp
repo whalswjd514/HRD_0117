@@ -10,15 +10,15 @@
 <%@ include file="DBConn.jsp" %>
 <%
 	request.setCharacterEncoding("utf-8");
-	PreparedStatement pstmt=null;
-	ResultSet rs=null;
 	String orderDate=request.getParameter("orderDate");
 	String orderName=request.getParameter("orderName");
 	String productId=request.getParameter("productId");
 	String unitprice=request.getParameter("unitprice");
 	String orderQty=request.getParameter("orderQty");
-	String orderAddress=request.getParameter("orderAddress");
+	String address=request.getParameter("address");
 	
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
 	try{
 		String sql="insert into order0117 values(?,?,?,?,?,?)";
 		pstmt=conn.prepareStatement(sql);
@@ -27,7 +27,7 @@
 		pstmt.setString(3, productId);
 		pstmt.setString(4, unitprice);
 		pstmt.setString(5, orderQty);
-		pstmt.setString(6, orderAddress);
+		pstmt.setString(6, address);
 		pstmt.executeUpdate();
 		System.out.println("주문정보 저장 성공");
 		

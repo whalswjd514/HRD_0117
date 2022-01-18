@@ -52,6 +52,7 @@
 					history.back(-1);
 				</script>
 				<%
+				}
 			}else if(productId==null || productId.equals("")){
 				productId="";
 			}else{
@@ -62,7 +63,6 @@
 				</script>
 				<%
 			}
-		}
 	}catch(SQLException e){
 		System.out.println("데이터베이스 에러");
 		e.printStackTrace();
@@ -93,7 +93,7 @@
 		<th>주문금액</th>
 		<td><input type="text" name="total" value="<%=total %>"></td>
 		<th>주문주소</th>
-		<td><input type="text" name="orderAddress"></td>
+		<td><input type="text" name="address"></td>
 	</tr>
 	<tr>
 		<td colspan=4 align=center>
@@ -117,9 +117,9 @@
 		}else if(document.form.productName.value==""){
 			alert("상품명을 입력하세요.");
 			document.form.productName.focus();
-		}else if(document.form.orderAddress.value==""){
+		}else if(document.form.address.value==""){
 			alert("주문자 주소를 입력하세요.");
-			document.form.orderAddress.focus();
+			document.form.address.focus();
 		}else{
 			form.action="addOrder_Process.jsp";
 		}
