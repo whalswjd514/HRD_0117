@@ -31,13 +31,13 @@
 	ResultSet rs=null;
 	
 	try{
-		String sql="select * from member0117";
+		String sql="select * from member0117 order by id";
 		pstmt=conn.prepareStatement(sql);
 		rs=pstmt.executeQuery();
 		while(rs.next()){
 			String id=rs.getString(1);
-			String name=rs.getString(2);
-			String password=rs.getString(3);
+			String name=rs.getString(3);
+			String password=rs.getString(2);
 			String gender=rs.getString(4);
 			String birth=rs.getString(5);
 			String mail=rs.getString(6);
@@ -57,7 +57,7 @@
 		<td><%=address %></td>
 		<td><%=timestamp %></td>
 		<td><a href="updateMember.jsp?id=<%=id %>">수정</a> / 
-			<a href="deleteMember.jsp?id=<%=id %>">삭제</a>
+			<a href="deleteMember.jsp?id=<%=id %>" onclick="if(!confirm('정말로 삭제하시겠습니까?')) return false;">삭제</a>
 		</td>
 	</tr>
 <%

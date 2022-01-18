@@ -79,7 +79,7 @@ footer{
 	width:60%;
 }
 #in2{
-	width:10%;
+	width:15%;
 }
 #th1{
 	background:lightgray;
@@ -88,6 +88,13 @@ footer{
 	width:15%;
 	height:20px;
 	background:white;
+}
+#btn2{
+	width:15%;
+	height:20px;
+	background:#282828;
+	color:white;
+	text-align:center;
 }
 .btn_group{
 	margin:5px 0 0 0;
