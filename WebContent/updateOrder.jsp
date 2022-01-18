@@ -16,59 +16,24 @@
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;
 	String productId=request.getParameter("productId");
-	String orderDate=request.getParameter("orderDate");
-	String orderName=request.getParameter("orderName");
-	String orderQty=request.getParameter("orderQty");
-	String name="";
-	if(orderDate==null){
-		orderDate="";
-	}
-	if(orderName==null){
-		orderName="";
-	}
-	int unitprice=0;
-	int pQty=0,total=0,stock=0;
-	if(orderQty==null){
-		orderQty="";
-		pQty=0;
-	}else{
-		pQty=Integer.parseInt(orderQty);
-	}
+	
 	try{
-		String sql="select name,unitprice,unitsInstock from product0117 where productId=?";
+		String sql="select orderDate,orderName,a.productId,b.name,a.unitprice,orderQty,orderAddress from order0117 a,product0117 b where a.productId=b.productId";
 		pstmt=conn.prepareStatement(sql);
 		pstmt.setString(1, productId);
 		rs=pstmt.executeQuery();
 		if(rs.next()){
-			name=rs.getString(1);
-			unitprice=rs.getInt(2);
-			stock=rs.getInt(3);
-			total=pQty*unitprice;
-			if(pQty>stock){
-				%>
-				<script>
-					alert("주문수량이 재고수량보다 많습니다.");
-					history.back(-1);
-				</script>
-				<%
-				}
-			}else if(productId==null || productId.equals("")){
-				productId="";
-			}else{
-				%>
-				<script>
-					alert("등록되지 않은 코드입니다.");
-					history.back(-1);
-				</script>
-				<%
-			}
-	}catch(SQLException e){
-		System.out.println("데이터베이스 에러");
-		e.printStackTrace();
-	}
+			String orderDate=rs.getString("orderDate");
+			String orderName=rs.getString("orderName");
+			String name=rs.getString("name");
+			String unitprice=rs.getString("unitprice");
+			String pQty=rs.getString("orderQty");
+			String total=rs.getString("total");
+			String address=rs.getString("address");
+			System.out.println("데이터 조회 성공");
 %>
-<form name="form" method="post" action="addOrder.jsp">
-<h1>주문정보 등록</h1>
+<form name="form" method="post" action="updateOrder_Process.jsp">
+<h1>주문정보 수정화면</h1>
 <table border=1 id="tab1">
 	<tr>
 		<th>주문일자</th>
@@ -92,7 +57,7 @@
 		<th>주문금액</th>
 		<td><input type="text" name="total" value="<%=total %>"></td>
 		<th>주문주소</th>
-		<td><input type="text" name="address"></td>
+		<td><input type="text" name="address" value="<%=address %>"></td>
 	</tr>
 	<tr>
 		<td colspan=4 align=center>
@@ -100,6 +65,13 @@
 			<input type="submit" value="저장" id="btn2" onclick="check()">
 		</td>
 	</tr>
+<%
+			}
+	}catch(SQLException e){
+		System.out.println("데이터 조회 실패");
+		e.printStackTrace();
+	}
+%>
 </table>
 </form>
 <script>
