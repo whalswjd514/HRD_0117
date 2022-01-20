@@ -16,6 +16,7 @@
 		<li><a href="addOrder.jsp">주문정보 등록</a></li>
 		<li><a href="selectMember.jsp">회원목록</a></li>
 		<li><a href="productList.jsp">상품목록</a></li>
+		<li><a href="list.jsp">게시판</a></li>
 		<li><a href="selectOrder.jsp">주문정보 목록</a></li>
 		<li><a href="index.jsp">홈으로</a></li>
 	</ul>
